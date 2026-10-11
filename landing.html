@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Realizar Pedido - Pywi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary: #25D366; --dark: #090d16; --card: #131c2e; --text: #f8fafc; --muted: #94a3b8; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--dark); color: var(--text); padding: 1.5rem; }
+    .product-card { background: var(--card); border-radius: 16px; padding: 1.5rem; text-align: center; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.1); }
+    .product-img { width: 100%; max-width: 300px; height: 300px; object-fit: cover; border-radius: 12px; margin-bottom: 1rem; background-color: #1e293b; }
+    .product-name { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem; line-height: 1.3; }
+    .product-price { font-size: 1.8rem; font-weight: 700; color: var(--primary); }
+    .form-container { max-width: 500px; margin: 0 auto; }
+    .form-title { text-align: center; margin-bottom: 1.5rem; font-size: 1.2rem; color: var(--text); }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--muted); margin-bottom: 0.4rem; }
+    .form-group input, .form-group select { width: 100%; padding: 1rem; background: var(--card); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 1rem; outline: none; transition: border-color 0.2s; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--primary); }
+    .whatsapp-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 1.2rem; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); transition: transform 0.2s, background 0.2s; }
+    .whatsapp-btn:hover { transform: translateY(-2px); background: #20bd5a; }
+    .whatsapp-btn:disabled { background: #475569; cursor: not-allowed; transform: none; }
+    .footer-note { text-align: center; font-size: 0.75rem; color: var(--muted); margin-top: 1.5rem; }
+  </style>
+</head>
+<body>
+  <div class="product-card">
+    <img id="prodImg" src="https://via.placeholder.com/300x300/131c2e/ffffff?text=Pywi" alt="Producto" class="product-img">
+    <h1 id="prodName" class="product-name">Cargando producto...</h1>
+    <p id="prodPrice" class="product-price">$0</p>
+  </div>
+  <div class="form-container">
+    <h2 class="form-title">Completa tus datos de envío</h2>
+    <form id="orderForm">
+      <div class="form-group"><label for="nombre">Nombre Completo</label><input type="text" id="nombre" placeholder="Ej. Juan Pérez" required></div>
+      <div class="form-group"><label for="telefono">Teléfono (WhatsApp)</label><input type="tel" id="telefono" placeholder="Ej. 300 123 4567" required></div>
+      <div class="form-group"><label for="departamento">Departamento</label>
+        <select id="departamento" required>
+          <option value="">Selecciona...</option>
+          <option value="Magdalena">Magdalena</option>
+          <option value="Atlántico">Atlántico</option>
+          <option value="Bogotá D.C.">Bogotá D.C.</option>
+          <option value="Antioquia">Antioquia</option>
+          <option value="Valle del Cauca">Valle del Cauca</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+      <div class="form-group"><label for="ciudad">Ciudad / Municipio</label><input type="text" id="ciudad" placeholder="Ej. Santa Marta" required></div>
+      <div class="form-group"><label for="direccion">Dirección de Entrega</label><input type="text" id="direccion" placeholder="Ej. Calle 10 # 5-20, Barrio Centro" required></div>
+      <button type="submit" class="whatsapp-btn" id="submitBtn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Enviar Pedido por WhatsApp
+      </button>
+    </form>
+    <p class="footer-note">Tus datos están seguros y solo se usarán para procesar este envío.</p>
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const producto = params.get('producto') || 'Producto no especificado';
+    const precio = params.get('precio') || '$0';
+    const imagen = params.get('imagen') || 'https://via.placeholder.com/300x300/131c2e/ffffff?text=Pywi';
+    document.getElementById('prodName').innerText = producto;
+    document.getElementById('prodPrice').innerText = precio;
+    document.getElementById('prodImg').src = imagen;
+
+    document.getElementById('orderForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      btn.innerHTML = '⏳ Procesando...';
+      btn.disabled = true;
+      const datos = { producto: producto, precio: precio, nombre: document.getElementById('nombre').value, telefono: document.getElementById('telefono').value, departamento: document.getElementById('departamento').value, ciudad: document.getElementById('ciudad').value, direccion: document.getElementById('direccion').value };
+      
+      // 👇 REEMPLAZAR CON SU URL DE GOOGLE APPS SCRIPT
+      const GOOGLE_SHEET_URL = 'https://pywi.venndelo.com/'; 
+      
+      try {
+        await fetch(GOOGLE_SHEET_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) });
+      } catch (error) { console.log('Error de red, pero se intentará abrir WhatsApp de todos modos.'); }
+
+      const mensaje = `¡Hola Pywi! 👋 Quiero realizar este pedido:%0A%0A *Producto:* ${producto}%0A💰 *Precio:* ${precio}%0A%0A *Datos de Envío:*%0A• Nombre: ${datos.nombre}%0A• Tel: ${datos.telefono}%0A• Depto: ${datos.departamento}%0A• Ciudad: ${datos.ciudad}%0A• Dirección: ${datos.direccion}%0A%0AQuedo atento a las instrucciones de pago. ¡Gracias!`;
+      
+      // 👇 REEMPLAZAR CON SU NÚMERO DE WHATSAPP
+      const numeroWhatsApp = '573027433437'; 
+      window.location.href = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
+      
+      setTimeout(() => { btn.innerHTML = 'Enviar Pedido por WhatsApp'; btn.disabled = false; }, 3000);
+    });
+  </script>
+</body>
+</html>
