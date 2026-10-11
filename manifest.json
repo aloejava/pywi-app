@@ -1,0 +1,34 @@
+{
+  "id": "/pywi-app/",
+  "name": "Pywi - Tienda y Ofertas",
+  "short_name": "Pywi",
+  "description": "Descubre las mejores ofertas en ropa deportiva, tecnología y más. Pide directo por WhatsApp.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#090d16",
+  "theme_color": "#090d16",
+  "orientation": "portrait-primary",
+  "lang": "es",
+  "categories": ["shopping", "lifestyle", "business"],
+  "icons": [
+    {
+      "src": "./logo.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
