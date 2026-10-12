@@ -11,6 +11,7 @@
     body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--dark); color: var(--text); padding: 1.5rem; }
     .product-card { background: var(--card); border-radius: 16px; padding: 1.5rem; text-align: center; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.1); }
     .product-img { width: 100%; max-width: 300px; height: 300px; object-fit: cover; border-radius: 12px; margin-bottom: 1rem; background-color: #1e293b; }
+    .product-video { width: 100%; max-width: 300px; border-radius: 12px; margin-bottom: 1rem; background-color: #1e293b; }
     .product-name { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem; line-height: 1.3; }
     .product-price { font-size: 1.8rem; font-weight: 700; color: var(--primary); }
     .form-container { max-width: 500px; margin: 0 auto; }
@@ -23,14 +24,18 @@
     .whatsapp-btn:hover { transform: translateY(-2px); background: #20bd5a; }
     .whatsapp-btn:disabled { background: #475569; cursor: not-allowed; transform: none; }
     .footer-note { text-align: center; font-size: 0.75rem; color: var(--muted); margin-top: 1.5rem; }
+    .media-container { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
   </style>
 </head>
 <body>
   <div class="product-card">
-    <img id="prodImg" src="https://via.placeholder.com/300x300/131c2e/ffffff?text=Pywi" alt="Producto" class="product-img">
+    <div class="media-container" id="mediaContainer">
+      <!-- Aquí se cargará la imagen o video automáticamente -->
+    </div>
     <h1 id="prodName" class="product-name">Cargando producto...</h1>
     <p id="prodPrice" class="product-price">$0</p>
   </div>
+
   <div class="form-container">
     <h2 class="form-title">Completa tus datos de envío</h2>
     <form id="orderForm">
@@ -56,36 +61,98 @@
     </form>
     <p class="footer-note">Tus datos están seguros y solo se usarán para procesar este envío.</p>
   </div>
+
   <script>
     const params = new URLSearchParams(window.location.search);
     const producto = params.get('producto') || 'Producto no especificado';
     const precio = params.get('precio') || '$0';
-    const imagen = params.get('imagen') || 'https://via.placeholder.com/300x300/131c2e/ffffff?text=Pywi';
+    const imagen = params.get('imagen') || '';
+    const video = params.get('video') || '';
+    
     document.getElementById('prodName').innerText = producto;
     document.getElementById('prodPrice').innerText = precio;
-    document.getElementById('prodImg').src = imagen;
+    
+    // Cargar imagen y/o video
+    const mediaContainer = document.getElementById('mediaContainer');
+    
+    if (video) {
+      // Si hay video, mostrarlo primero
+      const videoEl = document.createElement('video');
+      videoEl.src = video;
+      videoEl.controls = true;
+      videoEl.autoplay = true;
+      videoEl.muted = true;
+      videoEl.loop = true;
+      videoEl.className = 'product-video';
+      mediaContainer.appendChild(videoEl);
+    }
+    
+    if (imagen) {
+      // Si hay imagen, mostrarla
+      const imgEl = document.createElement('img');
+      imgEl.src = imagen;
+      imgEl.alt = producto;
+      imgEl.className = 'product-img';
+      mediaContainer.appendChild(imgEl);
+    }
+    
+    if (!imagen && !video) {
+      // Si no hay ni imagen ni video, mostrar placeholder
+      const imgEl = document.createElement('img');
+      imgEl.src = 'https://via.placeholder.com/300x300/131c2e/ffffff?text=Pywi';
+      imgEl.alt = producto;
+      imgEl.className = 'product-img';
+      mediaContainer.appendChild(imgEl);
+    }
 
     document.getElementById('orderForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
       btn.innerHTML = '⏳ Procesando...';
       btn.disabled = true;
-      const datos = { producto: producto, precio: precio, nombre: document.getElementById('nombre').value, telefono: document.getElementById('telefono').value, departamento: document.getElementById('departamento').value, ciudad: document.getElementById('ciudad').value, direccion: document.getElementById('direccion').value };
+      const datos = { 
+        producto: producto, 
+        precio: precio, 
+        nombre: document.getElementById('nombre').value, 
+        telefono: document.getElementById('telefono').value, 
+        departamento: document.getElementById('departamento').value, 
+        ciudad: document.getElementById('ciudad').value, 
+        direccion: document.getElementById('direccion').value 
+      };
       
       // 👇 REEMPLAZAR CON SU URL DE GOOGLE APPS SCRIPT
-      const GOOGLE_SHEET_URL = 'https://pywi.venndelo.com/'; 
+      const GOOGLE_SHEET_URL = 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI'; 
       
       try {
-        await fetch(GOOGLE_SHEET_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) });
-      } catch (error) { console.log('Error de red, pero se intentará abrir WhatsApp de todos modos.'); }
+        await fetch(GOOGLE_SHEET_URL, { 
+          method: 'POST', 
+          mode: 'no-cors', 
+          headers: { 'Content-Type': 'application/json' }, 
+          body: JSON.stringify(datos) 
+        });
+      } catch (error) { 
+        console.log('Error de red, pero se intentará abrir WhatsApp de todos modos.'); 
+      }
 
-      const mensaje = `¡Hola Pywi! 👋 Quiero realizar este pedido:%0A%0A *Producto:* ${producto}%0A💰 *Precio:* ${precio}%0A%0A *Datos de Envío:*%0A• Nombre: ${datos.nombre}%0A• Tel: ${datos.telefono}%0A• Depto: ${datos.departamento}%0A• Ciudad: ${datos.ciudad}%0A• Dirección: ${datos.direccion}%0A%0AQuedo atento a las instrucciones de pago. ¡Gracias!`;
+      const mensaje = `¡Hola Pywi! 👋 Quiero realizar este pedido:%0A%0A` +
+                      `📦 *Producto:* ${producto}%0A` +
+                      `💰 *Precio:* ${precio}%0A%0A` +
+                      `👤 *Datos de Envío:*%0A` +
+                      `• Nombre: ${datos.nombre}%0A` +
+                      `• Tel: ${datos.telefono}%0A` +
+                      `• Depto: ${datos.departamento}%0A` +
+                      `• Ciudad: ${datos.ciudad}%0A` +
+                      `• Dirección: ${datos.direccion}%0A%0A` +
+                      `Quedo atento a las instrucciones de pago. ¡Gracias!`;
       
       // 👇 REEMPLAZAR CON SU NÚMERO DE WHATSAPP
-      const numeroWhatsApp = '573027433437'; 
+      const numeroWhatsApp = '573000000000'; 
       window.location.href = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
       
-      setTimeout(() => { btn.innerHTML = 'Enviar Pedido por WhatsApp'; btn.disabled = false; }, 3000);
+      setTimeout(() => { 
+        btn.innerHTML = 'Enviar Pedido por WhatsApp'; 
+        btn.disabled = false; 
+      }, 3000);
     });
   </script>
 </body>
