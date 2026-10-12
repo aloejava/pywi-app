@@ -26,6 +26,7 @@
     .whatsapp-btn:disabled { background: #475569; cursor: not-allowed; transform: none; }
     .footer-note { text-align: center; font-size: 0.75rem; color: var(--muted); margin-top: 1.5rem; }
     .media-container { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+    .success-msg { display: none; background: rgba(37, 211, 102, 0.15); border: 1px solid var(--primary); color: var(--primary); padding: 1rem; border-radius: 8px; text-align: center; margin-bottom: 1rem; font-weight: 600; }
   </style>
 </head>
 <body>
@@ -37,6 +38,11 @@
 
   <div class="form-container">
     <h2 class="form-title">Completa tus datos de envío</h2>
+    
+    <div id="successMsg" class="success-msg">
+      ✅ Tus datos fueron registrados. Te contactaremos pronto.
+    </div>
+
     <form id="orderForm">
       <div class="form-group">
         <label for="producto">Producto</label>
@@ -82,6 +88,9 @@
     <p class="footer-note">Tus datos están seguros y solo se usarán para procesar este envío.</p>
   </div>
 
+  <!-- IFRAME OCULTO para enviar datos a Google Forms -->
+  <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
   <script>
     // 1. Leer datos del producto desde la URL
     const params = new URLSearchParams(window.location.search);
@@ -122,63 +131,85 @@
       mediaContainer.appendChild(imgEl);
     }
 
-    // 3. Manejar el envío del formulario
-    document.getElementById('orderForm').addEventListener('submit', async function(e) {
+    // 3. CAPTURA AUTOMÁTICA: Guardar datos en localStorage mientras el usuario escribe
+    // Esto permite recuperar datos si el cliente abandona y vuelve después
+    const campos = ['producto', 'precio', 'nombre', 'telefono', 'departamento', 'ciudad', 'direccion'];
+    const claveGuardado = 'pywi_lead_' + producto.replace(/\s+/g, '_');
+    
+    // Cargar datos guardados previamente (si el cliente volvió a la página)
+    campos.forEach(campo => {
+      const valorGuardado = localStorage.getItem(claveGuardado + '_' + campo);
+      if (valorGuardado && document.getElementById(campo).value === '') {
+        document.getElementById(campo).value = valorGuardado;
+      }
+    });
+
+    // Guardar automáticamente cada vez que el usuario escribe
+    campos.forEach(campo => {
+      const elemento = document.getElementById(campo);
+      elemento.addEventListener('input', function() {
+        localStorage.setItem(claveGuardado + '_' + campo, this.value);
+      });
+      elemento.addEventListener('change', function() {
+        localStorage.setItem(claveGuardado + '_' + campo, this.value);
+      });
+    });
+
+    // 4. Manejar el envío del formulario
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
-      btn.innerHTML = '⏳ Procesando...';
+      btn.innerHTML = '⏳ Registrando datos...';
       btn.disabled = true;
       
-      const datos = { 
-        producto: producto, 
-        precio: precio, 
-        nombre: document.getElementById('nombre').value, 
-        telefono: document.getElementById('telefono').value, 
-        departamento: document.getElementById('departamento').value, 
-        ciudad: document.getElementById('ciudad').value, 
-        direccion: document.getElementById('direccion').value 
-      };
+      // 5. ENVIAR DATOS A GOOGLE FORMS VIA IFRAME OCULTO (MÉTODO CONFIABLE)
+      const form = document.getElementById('orderForm');
+      form.target = 'hidden_iframe';
+      form.action = 'https://docs.google.com/forms/d/e/1FAIpQLSdT05ouhbZAHC99iiIKm6_kNdvD156jNJVz_8sNEocUlJZPEw/formResponse';
+      form.method = 'POST';
+      form.submit();
       
-      // 4. Enviar a Google Forms (Base de datos silenciosa)
-      const formData = new FormData();
-      formData.append('entry.208026899', producto);
-      formData.append('entry.625038141', precio);
-      formData.append('entry.1727265902', datos.nombre);
-      formData.append('entry.826346011', datos.telefono);
-      formData.append('entry.1920667681', datos.departamento);
-      formData.append('entry.1269154645', datos.ciudad);
-      formData.append('entry.2180338986', datos.direccion);
+      // Mostrar mensaje de éxito
+      document.getElementById('successMsg').style.display = 'block';
+      btn.innerHTML = '✅ Datos registrados. Abriendo WhatsApp...';
       
-      try {
-        await fetch('https://docs.google.com/forms/d/e/1FAIpQLSdT05ouhbZAHC99iiIKm6_kNdvD156jNJVz_8sNEocUlJZPEw/formResponse', {
-          method: 'POST',
-          mode: 'no-cors',
-          body: formData
-        });
-      } catch (error) { 
-        console.log('Error guardando en Google Sheets'); 
-      }
+      // 6. Limpiar localStorage después de enviar
+      campos.forEach(campo => {
+        localStorage.removeItem(claveGuardado + '_' + campo);
+      });
 
-      // 5. Abrir WhatsApp con el pedido
-      const mensaje = `¡Hola Pywi!  Quiero realizar este pedido:%0A%0A` +
-                      `📦 *Producto:* ${producto}%0A` +
-                      `💰 *Precio:* ${precio}%0A%0A` +
-                      `👤 *Datos de Envío:*%0A` +
-                      `• Nombre: ${datos.nombre}%0A` +
-                      `• Tel: ${datos.telefono}%0A` +
-                      `• Depto: ${datos.departamento}%0A` +
-                      `• Ciudad: ${datos.ciudad}%0A` +
-                      `• Dirección: ${datos.direccion}%0A%0A` +
-                      `Quedo atento a las instrucciones de pago. ¡Gracias!`;
-      
-      // ⚠️ REEMPLAZAR CON SU NÚMERO REAL DE WHATSAPP
-      const numeroWhatsApp = '573027433437'; 
-      window.location.href = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
-      
-      setTimeout(() => { 
-        btn.innerHTML = 'Enviar Pedido por WhatsApp'; 
-        btn.disabled = false; 
-      }, 3000);
+      // 7. Esperar 1 segundo y abrir WhatsApp
+      setTimeout(function() {
+        const datos = { 
+          producto: producto, 
+          precio: precio, 
+          nombre: document.getElementById('nombre').value, 
+          telefono: document.getElementById('telefono').value, 
+          departamento: document.getElementById('departamento').value, 
+          ciudad: document.getElementById('ciudad').value, 
+          direccion: document.getElementById('direccion').value 
+        };
+
+        const mensaje = `¡Hola Pywi! 👋 Quiero realizar este pedido:%0A%0A` +
+                        `📦 *Producto:* ${producto}%0A` +
+                        `💰 *Precio:* ${precio}%0A%0A` +
+                        ` *Datos de Envío:*%0A` +
+                        `• Nombre: ${datos.nombre}%0A` +
+                        `• Tel: ${datos.telefono}%0A` +
+                        `• Depto: ${datos.departamento}%0A` +
+                        `• Ciudad: ${datos.ciudad}%0A` +
+                        `• Dirección: ${datos.direccion}%0A%0A` +
+                        `Quedo atento a las instrucciones de pago. ¡Gracias!`;
+        
+        // ⚠️ REEMPLAZAR CON SU NÚMERO REAL DE WHATSAPP
+        const numeroWhatsApp = '573000000000'; 
+        window.location.href = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
+        
+        setTimeout(() => { 
+          btn.innerHTML = 'Enviar Pedido por WhatsApp'; 
+          btn.disabled = false; 
+        }, 3000);
+      }, 1000);
     });
   </script>
 </body>
