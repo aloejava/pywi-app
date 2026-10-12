@@ -20,6 +20,7 @@
     .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--muted); margin-bottom: 0.4rem; }
     .form-group input, .form-group select { width: 100%; padding: 1rem; background: var(--card); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 1rem; outline: none; transition: border-color 0.2s; }
     .form-group input:focus, .form-group select:focus { border-color: var(--primary); }
+    .form-group input[readonly] { background: #1e293b; color: #64748b; cursor: not-allowed; }
     .whatsapp-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 1.2rem; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); transition: transform 0.2s, background 0.2s; }
     .whatsapp-btn:hover { transform: translateY(-2px); background: #20bd5a; }
     .whatsapp-btn:disabled { background: #475569; cursor: not-allowed; transform: none; }
@@ -29,9 +30,7 @@
 </head>
 <body>
   <div class="product-card">
-    <div class="media-container" id="mediaContainer">
-      <!-- Aquí se cargará la imagen o video automáticamente -->
-    </div>
+    <div class="media-container" id="mediaContainer"></div>
     <h1 id="prodName" class="product-name">Cargando producto...</h1>
     <p id="prodPrice" class="product-price">$0</p>
   </div>
@@ -39,10 +38,25 @@
   <div class="form-container">
     <h2 class="form-title">Completa tus datos de envío</h2>
     <form id="orderForm">
-      <div class="form-group"><label for="nombre">Nombre Completo</label><input type="text" id="nombre" placeholder="Ej. Juan Pérez" required></div>
-      <div class="form-group"><label for="telefono">Teléfono (WhatsApp)</label><input type="tel" id="telefono" placeholder="Ej. 300 123 4567" required></div>
-      <div class="form-group"><label for="departamento">Departamento</label>
-        <select id="departamento" required>
+      <div class="form-group">
+        <label for="producto">Producto</label>
+        <input type="text" id="producto" name="entry.208026899" readonly>
+      </div>
+      <div class="form-group">
+        <label for="precio">Precio</label>
+        <input type="text" id="precio" name="entry.625038141" readonly>
+      </div>
+      <div class="form-group">
+        <label for="nombre">Nombre Completo</label>
+        <input type="text" id="nombre" name="entry.1727265902" placeholder="Ej. Juan Pérez" required>
+      </div>
+      <div class="form-group">
+        <label for="telefono">Teléfono (WhatsApp)</label>
+        <input type="tel" id="telefono" name="entry.826346011" placeholder="Ej. 300 123 4567" required>
+      </div>
+      <div class="form-group">
+        <label for="departamento">Departamento</label>
+        <select id="departamento" name="entry.1920667681" required>
           <option value="">Selecciona...</option>
           <option value="Magdalena">Magdalena</option>
           <option value="Atlántico">Atlántico</option>
@@ -52,8 +66,14 @@
           <option value="Otro">Otro</option>
         </select>
       </div>
-      <div class="form-group"><label for="ciudad">Ciudad / Municipio</label><input type="text" id="ciudad" placeholder="Ej. Santa Marta" required></div>
-      <div class="form-group"><label for="direccion">Dirección de Entrega</label><input type="text" id="direccion" placeholder="Ej. Calle 10 # 5-20, Barrio Centro" required></div>
+      <div class="form-group">
+        <label for="ciudad">Ciudad / Municipio</label>
+        <input type="text" id="ciudad" name="entry.1269154645" placeholder="Ej. Santa Marta" required>
+      </div>
+      <div class="form-group">
+        <label for="direccion">Dirección de Entrega</label>
+        <input type="text" id="direccion" name="entry.2180338986" placeholder="Ej. Calle 10 # 5-20, Barrio Centro" required>
+      </div>
       <button type="submit" class="whatsapp-btn" id="submitBtn">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
         Enviar Pedido por WhatsApp
@@ -63,20 +83,21 @@
   </div>
 
   <script>
+    // 1. Leer datos del producto desde la URL
     const params = new URLSearchParams(window.location.search);
     const producto = params.get('producto') || 'Producto no especificado';
     const precio = params.get('precio') || '$0';
     const imagen = params.get('imagen') || '';
     const video = params.get('video') || '';
     
+    // 2. Mostrar producto en la página
     document.getElementById('prodName').innerText = producto;
     document.getElementById('prodPrice').innerText = precio;
+    document.getElementById('producto').value = producto;
+    document.getElementById('precio').value = precio;
     
-    // Cargar imagen y/o video
     const mediaContainer = document.getElementById('mediaContainer');
-    
     if (video) {
-      // Si hay video, mostrarlo primero
       const videoEl = document.createElement('video');
       videoEl.src = video;
       videoEl.controls = true;
@@ -86,18 +107,14 @@
       videoEl.className = 'product-video';
       mediaContainer.appendChild(videoEl);
     }
-    
     if (imagen) {
-      // Si hay imagen, mostrarla
       const imgEl = document.createElement('img');
       imgEl.src = imagen;
       imgEl.alt = producto;
       imgEl.className = 'product-img';
       mediaContainer.appendChild(imgEl);
     }
-    
     if (!imagen && !video) {
-      // Si no hay ni imagen ni video, mostrar placeholder
       const imgEl = document.createElement('img');
       imgEl.src = 'https://via.placeholder.com/300x300/131c2e/ffffff?text=Pywi';
       imgEl.alt = producto;
@@ -105,11 +122,13 @@
       mediaContainer.appendChild(imgEl);
     }
 
+    // 3. Manejar el envío del formulario
     document.getElementById('orderForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
       btn.innerHTML = '⏳ Procesando...';
       btn.disabled = true;
+      
       const datos = { 
         producto: producto, 
         precio: precio, 
@@ -120,21 +139,28 @@
         direccion: document.getElementById('direccion').value 
       };
       
-      // 👇 REEMPLAZAR CON SU URL DE GOOGLE APPS SCRIPT
-      const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwhJBsC_2jX4UqKVGVw810oiMvLNO1y4oc4u6j533Cjv9GOQ3C3HeArg6rVOSnHaIQ/exec'; 
+      // 4. Enviar a Google Forms (Base de datos silenciosa)
+      const formData = new FormData();
+      formData.append('entry.208026899', producto);
+      formData.append('entry.625038141', precio);
+      formData.append('entry.1727265902', datos.nombre);
+      formData.append('entry.826346011', datos.telefono);
+      formData.append('entry.1920667681', datos.departamento);
+      formData.append('entry.1269154645', datos.ciudad);
+      formData.append('entry.2180338986', datos.direccion);
       
       try {
-        await fetch(GOOGLE_SHEET_URL, { 
-          method: 'POST', 
-          mode: 'no-cors', 
-          headers: { 'Content-Type': 'application/json' }, 
-          body: JSON.stringify(datos) 
+        await fetch('https://docs.google.com/forms/d/e/1FAIpQLSdT05ouhbZAHC99iiIKm6_kNdvD156jNJVz_8sNEocUlJZPEw/formResponse', {
+          method: 'POST',
+          mode: 'no-cors',
+          body: formData
         });
       } catch (error) { 
-        console.log('Error de red, pero se intentará abrir WhatsApp de todos modos.'); 
+        console.log('Error guardando en Google Sheets'); 
       }
 
-      const mensaje = `¡Hola Pywi! 👋 Quiero realizar este pedido:%0A%0A` +
+      // 5. Abrir WhatsApp con el pedido
+      const mensaje = `¡Hola Pywi!  Quiero realizar este pedido:%0A%0A` +
                       `📦 *Producto:* ${producto}%0A` +
                       `💰 *Precio:* ${precio}%0A%0A` +
                       `👤 *Datos de Envío:*%0A` +
@@ -145,8 +171,8 @@
                       `• Dirección: ${datos.direccion}%0A%0A` +
                       `Quedo atento a las instrucciones de pago. ¡Gracias!`;
       
-      // 👇 REEMPLAZAR CON SU NÚMERO DE WHATSAPP
-      const numeroWhatsApp = '573027433437'; 
+      // ⚠️ REEMPLAZAR CON SU NÚMERO REAL DE WHATSAPP
+      const numeroWhatsApp = '573000000000'; 
       window.location.href = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
       
       setTimeout(() => { 
