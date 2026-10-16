@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Pywi - Tu Tienda en el Bolsillo</title>
   <link rel="manifest" href="./manifest.json">
-  <meta name="theme-color" content="#2979ff">
+  <meta name="theme-color" content="#090d16">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Meta Pixel Code -->
@@ -19,13 +19,14 @@
   
   <style>
     :root { 
-      --primary: #2979ff; 
-      --primary-dark: #1a3a8f;
-      --dark: #ffffff; 
-      --card: #f8f9fa; 
-      --text: #1a1a1a; 
-      --muted: #6c757d;
-      --border: #e9ecef;
+      --primary: #25D366; 
+      --primary-dark: #20bd5a;
+      --dark: #090d16; 
+      --card: #131c2e; 
+      --text: #f8fafc; 
+      --muted: #94a3b8;
+      --border: rgba(255,255,255,0.1);
+      --header-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 25%, #7e57c2 50%, #ec407a 75%, #f093fb 100%);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     html, body { 
@@ -37,14 +38,14 @@
     body { padding-bottom: 80px; }
 
     header {
-      background: #ffffff;
-      padding: 1.5rem 1rem; text-align: center;
+      background: var(--header-gradient);
+      padding: 2rem 1rem; text-align: center;
       border-bottom: 1px solid var(--border); width: 100%;
     }
-    .logo-img { width: 120px; height: 120px; object-fit: contain; margin-bottom: 0.5rem; }
-    .tagline { color: var(--muted); font-size: 0.95rem; font-weight: 600; }
+    .logo-img { width: 130px; height: 130px; object-fit: contain; margin-bottom: 0.5rem; border-radius: 50%; background: white; padding: 8px; }
+    .tagline { color: rgba(255,255,255,0.9); font-size: 1rem; font-weight: 600; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
     
-    .search-section { padding: 1rem; width: 100%; background: #ffffff; }
+    .search-section { padding: 1rem; width: 100%; background: var(--dark); }
     .search-form { display: flex; gap: 0.5rem; width: 100%; }
     .search-input {
       flex: 1; padding: 0.9rem; border-radius: 10px;
@@ -58,7 +59,7 @@
     }
     .search-btn:active { background: var(--primary-dark); }
     
-    .section-title { text-align: center; font-size: 1.3rem; font-weight: 800; margin: 1.5rem 1rem 1rem; color: var(--text); }
+    .section-title { text-align: center; font-size: 1.4rem; font-weight: 800; margin: 1.5rem 1rem 1rem; color: var(--text); }
     
     .categories { padding: 0 1rem; width: 100%; }
     .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
@@ -69,7 +70,7 @@
       display: flex; flex-direction: column; align-items: center; gap: 0.4rem; cursor: pointer;
     }
     .cat-btn:active { transform: scale(0.96); border-color: var(--primary); }
-    .cat-btn span { font-size: 2rem; }
+    .cat-btn span { font-size: 2.2rem; }
     
     .products { padding: 0 1rem; width: 100%; }
     .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
@@ -77,9 +78,10 @@
       background: var(--card); border: 1px solid var(--border);
       border-radius: 12px; overflow: hidden; text-decoration: none;
       color: var(--text); display: flex; flex-direction: column;
+      transition: transform 0.2s ease;
     }
     .product-card:active { transform: scale(0.97); border-color: var(--primary); }
-    .product-img { width: 100%; height: 140px; object-fit: cover; background: #ffffff; display: block; }
+    .product-img { width: 100%; height: 150px; object-fit: contain; background: #ffffff; display: block; padding: 8px; }
     .product-info { padding: 0.75rem; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
     .product-name { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; line-height: 1.2; color: var(--text); }
     .product-price { color: var(--primary); font-weight: 800; font-size: 1rem; }
@@ -97,7 +99,7 @@
     }
     .order-btn:active { background: var(--primary-dark); }
     
-    footer { text-align: center; padding: 2rem 1rem; color: var(--muted); font-size: 0.8rem; margin-top: 2rem; background: #ffffff; border-top: 1px solid var(--border); }
+    footer { text-align: center; padding: 2rem 1rem; color: var(--muted); font-size: 0.8rem; margin-top: 2rem; background: var(--dark); border-top: 1px solid var(--border); }
   </style>
 </head>
 <body>
@@ -125,93 +127,237 @@
     </form>
   </div>
 
-  <h2 class="section-title">🛍️ Categorías</h2>
+  <h2 class="section-title">️ Categorías</h2>
   <div class="categories">
     <div class="cat-grid">
+      <div class="cat-btn" onclick="alert('Próximamente: Ropa Deportiva')"><span>🔥</span>Ropa Deportiva</div>
       <div class="cat-btn" onclick="alert('Próximamente: Tecnología')"><span>📱</span>Tecnología</div>
       <div class="cat-btn" onclick="alert('Próximamente: Belleza')"><span>💄</span>Belleza</div>
-      <div class="cat-btn" onclick="alert('Próximamente: Salud')"><span>💊</span>Salud</div>
-      <div class="cat-btn" onclick="alert('Próximamente: Hogar')"><span>🏠</span>Hogar</div>
+      <div class="cat-btn" onclick="alert('Próximamente: Hogar')"><span></span>Hogar</div>
       <div class="cat-btn" onclick="alert('Próximamente: Mascotas')"><span>🐾</span>Mascotas</div>
-      <div class="cat-btn" onclick="alert('Próximamente: Ropa')"><span>👕</span>Ropa</div>
+      <div class="cat-btn" onclick="alert('Próximamente: Salud')"><span>💊</span>Salud</div>
     </div>
   </div>
 
-  <h2 class="section-title">⭐ Destacados</h2>
+  <h2 class="section-title">⭐ Productos Destacados</h2>
   <div class="products">
     <div class="product-grid">
       
-      <div class="product-card">
+      <a href="landing.html?producto=Audifono+Traductor+con+IA&precio=$66.000&imagen=https://store-cdn.venndelo.com/shared/imagen-588424.jpg" class="product-card">
         <img src="https://store-cdn.venndelo.com/shared/imagen-588424.jpg" alt="Audífono Traductor IA" class="product-img">
         <div class="product-info">
           <div><span class="product-badge">OFERTA</span><div class="product-name">Audífono Traductor con IA</div></div>
           <div><div class="product-price">$66.000</div><div class="product-old-price">$78.000</div></div>
-          <a href="landing.html?producto=Audifono+Traductor+con+IA&precio=$66.000&imagen=https://store-cdn.venndelo.com/shared/imagen-588424.jpg" class="order-btn">Hacer Pedido</a>
+          <div class="order-btn">Hacer Pedido</div>
         </div>
-      </div>
+      </a>
 
-      <div class="product-card">
+      <a href="landing.html?producto=Mini+Proyector+T500&precio=$231.965&imagen=https://store-cdn.venndelo.com/shared/imagen-466550.jpg" class="product-card">
         <img src="https://store-cdn.venndelo.com/shared/imagen-466550.jpg" alt="Mini Proyector T500" class="product-img">
         <div class="product-info">
           <div><span class="product-badge">OFERTA</span><div class="product-name">Mini Proyector de Vídeo T500</div></div>
           <div><div class="product-price">$231.965</div><div class="product-old-price">$265.000</div></div>
-          <a href="landing.html?producto=Mini+Proyector+T500&precio=$231.965&imagen=https://store-cdn.venndelo.com/shared/imagen-466550.jpg" class="order-btn">Hacer Pedido</a>
+          <div class="order-btn">Hacer Pedido</div>
         </div>
-      </div>
+      </a>
 
-      <div class="product-card">
+      <a href="landing.html?producto=C+LAGEN+Colageno&precio=$64.300&imagen=https://store-cdn.venndelo.com/shared/image-c-lagen-1092829-i605675-s200x200-f1.jpg" class="product-card">
         <img src="https://store-cdn.venndelo.com/shared/image-c-lagen-1092829-i605675-s200x200-f1.jpg" alt="C LAGEN Colágeno" class="product-img">
         <div class="product-info">
           <div><span class="product-badge">-31%</span><div class="product-name">C LAGEN Colágeno</div></div>
           <div><div class="product-price">$64.300</div><div class="product-old-price">$93.000</div></div>
-          <a href="landing.html?producto=C+LAGEN+Colageno&precio=$64.300&imagen=https://store-cdn.venndelo.com/shared/image-c-lagen-1092829-i605675-s200x200-f1.jpg" class="order-btn">Hacer Pedido</a>
+          <div class="order-btn">Hacer Pedido</div>
         </div>
-      </div>
+      </a>
 
-      <div class="product-card">
+      <a href="landing.html?producto=Bisglicinato+de+Magnesio+x60&precio=$48.900&imagen=https://store-cdn.venndelo.com/shared/image-bisglicinato-de-magnesio-x60und-1091817-i603502-s200x200-f1.jpg" class="product-card">
+        <img src="https://store-cdn.venndelo.com/shared/image-bisglicinato-de-magnesio-x60und-1091817-i603502-s200x200-f1.jpg" alt="Magnesio" class="product-img">
+        <div class="product-info">
+          <div><span class="product-badge">-42%</span><div class="product-name">Bisglicinato de Magnesio x60</div></div>
+          <div><div class="product-price">$48.900</div><div class="product-old-price">$84.400</div></div>
+          <div class="order-btn">Hacer Pedido</div>
+        </div>
+      </a>
+
+      <a href="landing.html?producto=Berberina+x60&precio=$56.390&imagen=https://store-cdn.venndelo.com/shared/imagen-603499.jpg" class="product-card">
+        <img src="https://store-cdn.venndelo.com/shared/imagen-603499.jpg" alt="Berberina" class="product-img">
+        <div class="product-info">
+          <div><span class="product-badge">-29%</span><div class="product-name">Berberina x60und</div></div>
+          <div><div class="product-price">$56.390</div><div class="product-old-price">$79.900</div></div>
+          <div class="order-btn">Hacer Pedido</div>
+        </div>
+      </a>
+
+      <a href="landing.html?producto=Photen+X+x500ml&precio=$66.900&imagen=https://store-cdn.venndelo.com/shared/imagen-603442.jpg" class="product-card">
+        <img src="https://store-cdn.venndelo.com/shared/imagen-603442.jpg" alt="Photen X" class="product-img">
+        <div class="product-info">
+          <div><span class="product-badge">-32%</span><div class="product-name">Photen X x500ml</div></div>
+          <div><div class="product-price">$66.900</div><div class="product-old-price">$98.000</div></div>
+          <div class="order-btn">Hacer Pedido</div>
+        </div>
+      </a>
+
+      <a href="landing.html?producto=Picadora+Electrica+2L&precio=$83.999&imagen=https://store-cdn.venndelo.com/shared/imagen-602768.jpg" class="product-card">
         <img src="https://store-cdn.venndelo.com/shared/imagen-602768.jpg" alt="Picadora Eléctrica" class="product-img">
         <div class="product-info">
           <div><span class="product-badge">-36%</span><div class="product-name">Picadora Eléctrica 2L</div></div>
           <div><div class="product-price">$83.999</div><div class="product-old-price">$132.000</div></div>
-          <a href="landing.html?producto=Picadora+Electrica+2L&precio=$83.999&imagen=https://store-cdn.venndelo.com/shared/imagen-602768.jpg" class="order-btn">Hacer Pedido</a>
+          <div class="order-btn">Hacer Pedido</div>
         </div>
-      </div>
+      </a>
 
-      <div class="product-card">
+      <a href="landing.html?producto=Escurridor+de+Platos+con+Tapa&precio=$141.000&imagen=https://store-cdn.venndelo.com/shared/imagen-593262.jpg" class="product-card">
         <img src="https://store-cdn.venndelo.com/shared/imagen-593262.jpg" alt="Escurridor de Platos" class="product-img">
         <div class="product-info">
-          <div><span class="product-badge">OFERTA</span><div class="product-name">Escurridor de Platos con Tapa</div></div>
+          <div><span class="product-badge">-11%</span><div class="product-name">Escurridor de Platos con Tapa</div></div>
           <div><div class="product-price">$141.000</div><div class="product-old-price">$158.000</div></div>
-          <a href="landing.html?producto=Escurridor+de+Platos+con+Tapa&precio=$141.000&imagen=https://store-cdn.venndelo.com/shared/imagen-593262.jpg" class="order-btn">Hacer Pedido</a>
+          <div class="order-btn">Hacer Pedido</div>
         </div>
-      </div>
+      </a>
 
-      <div class="product-card">
+      <a href="landing.html?producto=Cinturon+Termico+Colicos&precio=$59.300&imagen=https://store-cdn.venndelo.com/shared/imagen-574284.jpg" class="product-card">
+        <img src="https://store-cdn.venndelo.com/shared/imagen-574284.jpg" alt="Cinturón Térmico" class="product-img">
+        <div class="product-info">
+          <div><span class="product-badge">-25%</span><div class="product-name">Cinturón Térmico Cólicos</div></div>
+          <div><div class="product-price">$59.300</div><div class="product-old-price">$78.600</div></div>
+          <div class="order-btn">Hacer Pedido</div>
+        </div>
+      </a>
+
+      <a href="landing.html?producto=Blanqueador+Dientes+Carbon&precio=$29.400&imagen=https://store-cdn.venndelo.com/shared/imagen-561597.jpg" class="product-card">
+        <img src="https://store-cdn.venndelo.com/shared/imagen-561597.jpg" alt="Blanqueador Dientes" class="product-img">
+        <div class="product-info">
+          <div><span class="product-badge">-34%</span><div class="product-name">Blanqueador Dientes Carbón</div></div>
+          <div><div class="product-price">$29.400</div><div class="product-old-price">$44.600</div></div>
+          <div class="order-btn">Hacer Pedido</div>
+        </div>
+      </a>
+
+      <a href="landing.html?producto=Suero+Crecimiento+Cabello&precio=$34.700&imagen=https://store-cdn.venndelo.com/shared/imagen-533788.jpg" class="product-card">
         <img src="https://store-cdn.venndelo.com/shared/imagen-533788.jpg" alt="Suero Cabello" class="product-img">
         <div class="product-info">
           <div><span class="product-badge">-49%</span><div class="product-name">Suero Crecimiento Cabello</div></div>
           <div><div class="product-price">$34.700</div><div class="product-old-price">$68.000</div></div>
-          <a href="landing.html?producto=Suero+Crecimiento+Cabello&precio=$34.700&imagen=https://store-cdn.venndelo.com/shared/imagen-533788.jpg" class="order-btn">Hacer Pedido</a>
+          <div class="order-btn">Hacer Pedido</div>
         </div>
-      </div>
+      </a>
 
-      <div class="product-card">
+      <a href="landing.html?producto=Crema+Blanqueadora+Hismile+V34&precio=$53.000&imagen=https://store-cdn.venndelo.com/shared/imagen-512993.jpg" class="product-card">
         <img src="https://store-cdn.venndelo.com/shared/imagen-512993.jpg" alt="Hismile V34" class="product-img">
         <div class="product-info">
           <div><span class="product-badge">-22%</span><div class="product-name">Crema Blanqueadora Hismile V34</div></div>
           <div><div class="product-price">$53.000</div><div class="product-old-price">$68.000</div></div>
-          <a href="landing.html?producto=Crema+Blanqueadora+Hismile+V34&precio=$53.000&imagen=https://store-cdn.venndelo.com/shared/imagen-512993.jpg" class="order-btn">Hacer Pedido</a>
+          <div class="order-btn">Hacer Pedido</div>
         </div>
-      </div>
+      </a>
 
-      <div class="product-card">
+      <a href="landing.html?producto=Tendedero+Gancho+Espira&precio=$36.900&imagen=https://store-cdn.venndelo.com/shared/imagen-475995.jpg" class="product-card">
+        <img src="https://store-cdn.venndelo.com/shared/imagen-475995.jpg" alt="Tendedero Espira" class="product-img">
+        <div class="product-info">
+          <div><span class="product-badge">-40%</span><div class="product-name">Tendedero Gancho Espira</div></div>
+          <div><div class="product-price">$36.900</div><div class="product-old-price">$62.000</div></div>
+          <div class="order-btn">Hacer Pedido</div>
+        </div>
+      </a>
+
+      <a href="landing.html?producto=Cepillo+Masajeador+Mascotas+2en1&precio=$24.000&imagen=https://store-cdn.venndelo.com/shared/imagen-472350.jpg" class="product-card">
         <img src="https://store-cdn.venndelo.com/shared/imagen-472350.jpg" alt="Cepillo Mascotas" class="product-img">
         <div class="product-info">
           <div><span class="product-badge">-48%</span><div class="product-name">Cepillo Masajeador Mascotas 2 en 1</div></div>
           <div><div class="product-price">$24.000</div><div class="product-old-price">$46.355</div></div>
-          <a href="landing.html?producto=Cepillo+Masajeador+Mascotas+2en1&precio=$24.000&imagen=https://store-cdn.venndelo.com/shared/imagen-472350.jpg" class="order-btn">Hacer Pedido</a>
+          <div class="order-btn">Hacer Pedido</div>
         </div>
-      </div>
+      </a>
+
+      <a href="landing.html?producto=Audifono+Sordera+Amplificador&precio=$53.000&imagen=https://store-cdn.venndelo.com/shared/imagen-471869.jpg" class="product-card">
+        <img src="https://store-cdn.venndelo.com/shared/imagen-471869.jpg" alt="Audífono Sordera" class="product-img">
+        <div class="product-info">
+          <div><span class="product-badge">OFERTA</span><div class="product-name">Audífono Amplificador Sordera</div></div>
+          <div><div class="product-price">$53.000</div><div class="product-old-price">$68.000</div></div>
+          <div class="order-btn">Hacer Pedido</div>
+        </div>
+      </a>
+
+      <a href="landing.html?producto=Organizador+Gancho+Giratorio+9en1&precio=$22.000&imagen=https://store-cdn.venndelo.com/shared/imagen-415383.jpg" class="product-card">
+        <img src="https://store-cdn.venndelo.com/shared/imagen-415383.jpg" alt="Organizador Giratorio" class="product-img">
+        <div class="product-info">
+          <div><span class="product-badge">-14%</span><div class="product-name">Organizador Gancho Giratorio 9 en 1</div></div>
+          <div><div class="product-price">$22.000</div><div class="product-old-price">$25.599</div></div>
+          <div class="order-btn">Hacer Pedido</div>
+        </div>
+      </a>
+
+      <a href="landing.html?producto=Lampara+Secador+Unas+UV+LED+48w&precio=$83.000&imagen=https://store-cdn.venndelo.com/shared/imagen-385892.jpg" class="product-card">
+        <img src="https://store-cdn.venndelo.com/shared/imagen-385892.jpg" alt="Lámpara Uñas UV" class="product-img">
+        <div class="product-info">
+          <div><span class="product-badge">-23%</span><div class="product-name">Lámpara Secador Uñas UV LED 48w</div></div>
+          <div><div class="product-price">$83.000</div><div class="product-old-price">$108.000</div></div>
+          <div class="order-btn">Hacer Pedido</div>
+        </div>
+      </a>
+
+      <a href="landing.html?producto=Llave+Universal+Multiuso&precio=$51.999&imagen=https://store-cdn.venndelo.com/shared/imagen-352393.jpg" class="product-card">
+        <img src="https://store-cdn.venndelo.com/shared/imagen-352393.jpg" alt="Llave Universal" class="product-img">
+        <div class="product-info">
+          <div><span class="product-badge">-41%</span><div class="product-name">Llave Universal Multiuso</div></div>
+          <div><div class="product-price">$51.999</div><div class="product-old-price">$88.000</div></div>
+          <div class="order-btn">Hacer Pedido</div>
+        </div>
+      </a>
+
+      <a href="landing.html?producto=Llave+Universal+48en1&precio=$63.645&imagen=https://store-cdn.venndelo.com/shared/imagen-316629.jpg" class="product-card">
+        <img src="https://store-cdn.venndelo.com/shared/imagen-316629.jpg" alt="Llave 48 en 1" class="product-img">
+        <div class="product-info">
+          <div><span class="product-badge">-6%</span><div class="product-name">Llave Universal 48 en 1</div></div>
+          <div><div class="product-price">$63.645</div><div class="product-old-price">$68.000</div></div>
+          <div class="order-btn">Hacer Pedido</div>
+        </div>
+      </a>
+
+      <a href="landing.html?producto=Levantador+Busto+Adhesivo&precio=$43.000&imagen=https://store-cdn.venndelo.com/shared/imagen-285644.jpg" class="product-card">
+        <img src="https://store-cdn.venndelo.com/shared/imagen-285644.jpg" alt="Levantador Busto" class="product-img">
+        <div class="product-info">
+          <div><span class="product-badge">-23%</span><div class="product-name">Levantador Busto Adhesivo</div></div>
+          <div><div class="product-price">$43.000</div><div class="product-old-price">$56.000</div></div>
+          <div class="order-btn">Hacer Pedido</div>
+        </div>
+      </a>
+
+      <a href="landing.html?producto=Shampoo+Canas+Color+Negro&precio=$43.005&imagen=https://store-cdn.venndelo.com/shared/imagen-523773.jpg" class="product-card">
+        <img src="https://store-cdn.venndelo.com/shared/imagen-523773.jpg" alt="Shampoo Canas" class="product-img">
+        <div class="product-info">
+          <div><span class="product-badge">-31%</span><div class="product-name">Shampoo Canas Color Negro x10</div></div>
+          <div><div class="product-price">$43.005</div><div class="product-old-price">$62.000</div></div>
+          <div class="order-btn">Hacer Pedido</div>
+        </div>
+      </a>
+
+      <a href="landing.html?producto=Bombillos+de+Mosquito+15W&precio=$39.000&imagen=https://store-cdn.venndelo.com/shared/imagen-384421.jpg" class="product-card">
+        <img src="https://store-cdn.venndelo.com/shared/imagen-384421.jpg" alt="Bombillos Mosquito" class="product-img">
+        <div class="product-info">
+          <div><span class="product-badge">-19%</span><div class="product-name">Bombillos de Mosquito 15W</div></div>
+          <div><div class="product-price">$39.000</div><div class="product-old-price">$48.000</div></div>
+          <div class="order-btn">Hacer Pedido</div>
+        </div>
+      </a>
+
+      <a href="landing.html?producto=Grifo+Ahorrador+Purificador+360&precio=$32.000&imagen=https://store-cdn.venndelo.com/shared/imagen-271083.jpg" class="product-card">
+        <img src="https://store-cdn.venndelo.com/shared/imagen-271083.jpg" alt="Grifo Ahorrador" class="product-img">
+        <div class="product-info">
+          <div><span class="product-badge">-24%</span><div class="product-name">Grifo Ahorrador Purificador 360°</div></div>
+          <div><div class="product-price">$32.000</div><div class="product-old-price">$42.000</div></div>
+          <div class="order-btn">Hacer Pedido</div>
+        </div>
+      </a>
+
+      <a href="landing.html?producto=Molinillo+Pimienta+Madera&precio=$63.900&imagen=https://store-cdn.venndelo.com/shared/imagen-476674.jpg" class="product-card">
+        <img src="https://store-cdn.venndelo.com/shared/imagen-476674.jpg" alt="Molinillo Pimienta" class="product-img">
+        <div class="product-info">
+          <div><span class="product-badge">-23%</span><div class="product-name">Molinillo Pimienta y Sales en Madera</div></div>
+          <div><div class="product-price">$63.900</div><div class="product-old-price">$83.000</div></div>
+          <div class="order-btn">Hacer Pedido</div>
+        </div>
+      </a>
 
     </div>
   </div>
