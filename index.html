@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Pywi - Tu Tienda en el Bolsillo</title>
   <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" href="logo-192.png">
   <meta name="theme-color" content="#090d16">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   
@@ -26,7 +27,6 @@
       --text: #f8fafc; 
       --muted: #94a3b8;
       --accent: #3b82f6;
-      --discount: #ef4444;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     html, body { 
@@ -41,9 +41,13 @@
       background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
       padding: 1.5rem 1rem; text-align: center;
       border-bottom: 1px solid rgba(255,255,255,0.1); width: 100%;
+      display: flex; flex-direction: column; align-items: center;
     }
-    .logo {
-      font-size: 2.5rem; font-weight: 800; letter-spacing: 3px;
+    .logo-img {
+      max-width: 180px; height: auto; margin-bottom: 0.5rem;
+    }
+    .logo-text {
+      font-size: 2.2rem; font-weight: 800; letter-spacing: 1px;
       margin-bottom: 0.3rem;
       background: linear-gradient(135deg, #25D366 0%, #3b82f6 50%, #8b5cf6 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -58,11 +62,7 @@
     
     /* CATEGORÍAS */
     .categories { padding: 0 1rem; width: 100%; }
-    .cat-grid { 
-      display: grid; 
-      grid-template-columns: repeat(2, 1fr); 
-      gap: 0.75rem;
-    }
+    .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
     .cat-btn {
       background: var(--card); border: 1px solid rgba(255,255,255,0.1);
       padding: 1.5rem 0.5rem; border-radius: 14px; text-align: center;
@@ -75,17 +75,10 @@
     
     /* BOTÓN VOLVER */
     .back-btn {
-      display: none;
-      margin: 1rem;
-      padding: 0.8rem 1.5rem;
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 10px;
-      color: var(--text);
-      font-weight: 700;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
+      display: none; margin: 1rem; padding: 0.8rem 1.5rem;
+      background: var(--card); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; color: var(--text); font-weight: 700; font-size: 0.9rem;
+      cursor: pointer; transition: all 0.3s ease;
     }
     .back-btn:active { transform: scale(0.95); background: var(--card-hover); }
     .back-btn.visible { display: inline-block; }
@@ -93,51 +86,29 @@
     /* PRODUCTOS */
     .products { padding: 0 1rem; width: 100%; display: none; }
     .products.visible { display: block; }
-    .product-grid { 
-      display: grid; 
-      grid-template-columns: repeat(2, 1fr); 
-      gap: 0.75rem;
-    }
+    .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
     .product-card {
       background: var(--card); border: 1px solid rgba(255,255,255,0.1);
       border-radius: 12px; overflow: hidden; text-decoration: none;
-      color: var(--text); display: flex; flex-direction: column;
-      transition: all 0.3s ease;
+      color: var(--text); display: flex; flex-direction: column; transition: all 0.3s ease;
     }
     .product-card:active { transform: scale(0.97); }
-    .product-img { 
-      width: 100%; height: 140px; object-fit: cover; 
-      background: #1e293b; display: block;
-    }
+    .product-img { width: 100%; height: 140px; object-fit: cover; background: #1e293b; display: block; }
     .product-info { padding: 0.75rem; flex: 1; display: flex; flex-direction: column; }
-    .product-name { 
-      font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; 
-      line-height: 1.2; min-height: 2.4em;
-    }
+    .product-name { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; line-height: 1.2; min-height: 2.4em; }
     .product-price-container { margin-bottom: 0.4rem; }
-    .product-price { 
-      color: var(--primary); font-weight: 800; font-size: 1rem; 
-    }
-    .product-price-old { 
-      color: var(--muted); font-size: 0.75rem; 
-      text-decoration: line-through; margin-left: 0.3rem;
-    }
+    .product-price { color: var(--primary); font-weight: 800; font-size: 1rem; }
+    .product-price-old { color: var(--muted); font-size: 0.75rem; text-decoration: line-through; margin-left: 0.3rem; }
     .product-shipping { 
-      font-size: 0.65rem; font-weight: 700; color: var(--accent);
-      text-transform: uppercase; letter-spacing: 0.5px;
+      font-size: 0.6rem; font-weight: 700; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.3px;
       background: rgba(59, 130, 246, 0.1);
-      padding: 0.3rem 0.4rem; border-radius: 4px;
-      margin-top: auto;
+      padding: 0.3rem 0.4rem; border-radius: 4px; margin-top: auto;
     }
     
-    /* CATEGORÍA ACTIVA */
     .category-header {
-      display: none;
-      text-align: center;
-      padding: 0.5rem 1rem;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--primary);
+      display: none; text-align: center; padding: 0.5rem 1rem;
+      font-size: 1.1rem; font-weight: 700; color: var(--primary);
     }
     .category-header.visible { display: block; }
     
@@ -166,37 +137,26 @@
   </script>
 
   <header>
-    <div class="logo">PYWI</div>
+    <!-- LOGO DE IMAGEN -->
+    <img src="logo.png" alt="Pywi" class="logo-img">
+    <!-- LOGO DE TEXTO (Respaldo) -->
+    <div class="logo-text">Pywi</div>
     <p class="tagline">Tu tienda favorita, ahora en tu bolsillo</p>
   </header>
 
   <h2 class="section-title" id="mainTitle">🛍️ Nuestras Categorías</h2>
-  
   <div class="category-header" id="categoryHeader"></div>
-  
   <button class="back-btn" id="backBtn" onclick="showCategories()">← Volver a categorías</button>
 
   <!-- CATEGORÍAS -->
   <div class="categories" id="categoriesSection">
     <div class="cat-grid">
-      <div class="cat-btn" onclick="showProducts('tecnologia')">
-        <span>📱</span>Tecnología
-      </div>
-      <div class="cat-btn" onclick="showProducts('belleza')">
-        <span>💄</span>Belleza
-      </div>
-      <div class="cat-btn" onclick="showProducts('salud')">
-        <span>💊</span>Salud
-      </div>
-      <div class="cat-btn" onclick="showProducts('hogar')">
-        <span></span>Hogar
-      </div>
-      <div class="cat-btn" onclick="showProducts('mascota')">
-        <span>🐾</span>Mascota
-      </div>
-      <div class="cat-btn" onclick="showProducts('ropa')">
-        <span>👕</span>Ropa
-      </div>
+      <div class="cat-btn" onclick="showProducts('tecnologia')"><span></span>Tecnología</div>
+      <div class="cat-btn" onclick="showProducts('belleza')"><span>💄</span>Belleza</div>
+      <div class="cat-btn" onclick="showProducts('salud')"><span>💊</span>Salud</div>
+      <div class="cat-btn" onclick="showProducts('hogar')"><span>🏠</span>Hogar</div>
+      <div class="cat-btn" onclick="showProducts('mascota')"><span>🐾</span>Mascota</div>
+      <div class="cat-btn" onclick="showProducts('ropa')"><span>👕</span>Ropa</div>
     </div>
   </div>
 
@@ -207,11 +167,11 @@
 
   <footer>
     <p>© 2026 Pywi - Todos los derechos reservados</p>
-    <p style="margin-top: 0.5rem;">Created by <span class="brand">Móvil Social Marketing</span></p>
+    <p style="margin-top: 0.5rem;">Created by <span class="brand">MSM</span></p>
+    <p style="margin-top: 0.2rem; font-size: 0.7rem;">Mobile Social Marketing</p>
   </footer>
 
   <script>
-    // BASE DE DATOS DE PRODUCTOS
     const productos = {
       tecnologia: [
         { nombre: "Audífono Sordera Amplificador", precio: "$53.000", precioOld: "$68.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-471869.jpg" },
@@ -229,35 +189,31 @@
         { nombre: "Bisglicinato de Magnesio x60", precio: "$48.900", precioOld: "$84.400", imagen: "https://store-cdn.venndelo.com/shared/image-bisglicinato-de-magnesio-x60und-1091817-i603502-s200x200-f1.jpg" },
         { nombre: "Berberina x60", precio: "$56.390", precioOld: "$79.900", imagen: "https://store-cdn.venndelo.com/shared/imagen-603499.jpg" },
         { nombre: "Photen X x500ml", precio: "$66.900", precioOld: "$98.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-603442.jpg" },
-        { nombre: "Cinturón Térmico Cólicos Menstruales", precio: "$59.300", precioOld: "$78.600", imagen: "https://store-cdn.venndelo.com/shared/imagen-574284.jpg" },
-        { nombre: "Blanqueador de Dientes Carbón Activado", precio: "$29.400", precioOld: "$44.600", imagen: "https://store-cdn.venndelo.com/shared/imagen-561597.jpg" }
+        { nombre: "Cinturón Térmico Cólicos", precio: "$59.300", precioOld: "$78.600", imagen: "https://store-cdn.venndelo.com/shared/imagen-574284.jpg" },
+        { nombre: "Blanqueador Dientes Carbón", precio: "$29.400", precioOld: "$44.600", imagen: "https://store-cdn.venndelo.com/shared/imagen-561597.jpg" }
       ],
       hogar: [
         { nombre: "Escurridor de Platos con Tapa 65cm", precio: "$141.000", precioOld: "$158.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-593262.jpg" },
         { nombre: "Picadora Eléctrica de Alimentos 2L", precio: "$83.999", precioOld: "$132.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-602768.jpg" },
         { nombre: "Tendedero Gancho Espira", precio: "$36.900", precioOld: "$62.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-475995.jpg" },
-        { nombre: "Organizador Gancho Múltiple Giratorio 9 en 1", precio: "$22.000", precioOld: "$25.599", imagen: "https://store-cdn.venndelo.com/shared/imagen-415383.jpg" },
+        { nombre: "Organizador Gancho Múltiple 9 en 1", precio: "$22.000", precioOld: "$25.599", imagen: "https://store-cdn.venndelo.com/shared/imagen-415383.jpg" },
         { nombre: "Llave Universal Multiuso", precio: "$51.999", precioOld: "$88.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-352393.jpg" },
         { nombre: "Llave Universal 48 en 1", precio: "$63.645", precioOld: "$68.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-316629.jpg" },
-        { nombre: "Bombillos de Mosquito 15W Morado", precio: "$39.000", precioOld: "$48.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-384421.jpg" },
-        { nombre: "Grifo Ahorrador y Purificador Gira 360°", precio: "$32.000", precioOld: "$42.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-271083.jpg" },
-        { nombre: "Molinillo de Pimienta y Sales en Madera", precio: "$63.900", precioOld: "$83.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-476674.jpg" }
+        { nombre: "Bombillos de Mosquito 15W", precio: "$39.000", precioOld: "$48.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-384421.jpg" },
+        { nombre: "Grifo Ahorrador y Purificador 360°", precio: "$32.000", precioOld: "$42.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-271083.jpg" },
+        { nombre: "Molinillo de Pimienta y Sales", precio: "$63.900", precioOld: "$83.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-476674.jpg" }
       ],
       mascota: [
-        { nombre: "Cepillo Masajeador y Removedor de Pelos 2 en 1", precio: "$24.000", precioOld: "$46.355", imagen: "https://store-cdn.venndelo.com/shared/imagen-472350.jpg" }
+        { nombre: "Cepillo Masajeador Mascotas 2 en 1", precio: "$24.000", precioOld: "$46.355", imagen: "https://store-cdn.venndelo.com/shared/imagen-472350.jpg" }
       ],
       ropa: [
-        { nombre: "Levantador Busto Reutilizable Brasier Adhesivo", precio: "$43.000", precioOld: "$56.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-285644.jpg" }
+        { nombre: "Levantador Busto Reutilizable", precio: "$43.000", precioOld: "$56.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-285644.jpg" }
       ]
     };
 
     const nombresCategorias = {
-      tecnologia: "📱 Tecnología",
-      belleza: " Belleza",
-      salud: "💊 Salud",
-      hogar: "🏠 Hogar",
-      mascota: "🐾 Mascota",
-      ropa: "👕 Ropa"
+      tecnologia: "📱 Tecnología", belleza: "💄 Belleza", salud: "💊 Salud",
+      hogar: "🏠 Hogar", mascota: "🐾 Mascota", ropa: " Ropa"
     };
 
     function showProducts(categoria) {
@@ -289,13 +245,9 @@
       document.getElementById('backBtn').classList.add('visible');
       document.getElementById('categoryHeader').classList.add('visible');
       document.getElementById('categoryHeader').textContent = nombresCategorias[categoria];
-      
       window.scrollTo({ top: 0, behavior: 'smooth' });
       
-      // Tracking de Meta Pixel
-      if (typeof fbq !== 'undefined') {
-        fbq('track', 'ViewContent', { content_category: categoria });
-      }
+      if (typeof fbq !== 'undefined') fbq('track', 'ViewContent', { content_category: categoria });
     }
 
     function showCategories() {
@@ -304,7 +256,6 @@
       document.getElementById('productsSection').classList.remove('visible');
       document.getElementById('backBtn').classList.remove('visible');
       document.getElementById('categoryHeader').classList.remove('visible');
-      
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
