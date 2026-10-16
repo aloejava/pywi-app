@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -109,4 +108,149 @@
       color: #3b82f6;
       text-transform: uppercase;
       background: rgba(59, 130, 246, 0.1);
-      padding: 0.3rem 0
+      padding: 0.3rem 0.4rem;
+      border-radius: 4px;
+      margin-top: auto;
+    }
+    .category-header {
+      display: none;
+      text-align: center;
+      padding: 0.5rem 1rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #25D366;
+    }
+    footer { 
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #94a3b8;
+      font-size: 0.75rem;
+      margin-top: 2rem;
+    }
+    footer .brand { 
+      color: #f8fafc;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Pywi</div>
+    <p class="tagline">Tu tienda favorita, ahora en tu bolsillo</p>
+  </header>
+
+  <h2 class="section-title" id="mainTitle">🛍️ Nuestras Categorías</h2>
+  <div class="category-header" id="categoryHeader"></div>
+  <button class="back-btn" id="backBtn" onclick="showCategories()">← Volver a categorías</button>
+
+  <div class="categories" id="categoriesSection">
+    <div class="cat-grid">
+      <div class="cat-btn" onclick="showProducts('tecnologia')"><span>📱</span>Tecnología</div>
+      <div class="cat-btn" onclick="showProducts('belleza')"><span>💄</span>Belleza</div>
+      <div class="cat-btn" onclick="showProducts('salud')"><span>💊</span>Salud</div>
+      <div class="cat-btn" onclick="showProducts('hogar')"><span>🏠</span>Hogar</div>
+      <div class="cat-btn" onclick="showProducts('mascota')"><span>🐾</span>Mascota</div>
+      <div class="cat-btn" onclick="showProducts('ropa')"><span>👕</span>Ropa</div>
+    </div>
+  </div>
+
+  <div class="products" id="productsSection">
+    <div class="product-grid" id="productGrid"></div>
+  </div>
+
+  <footer>
+    <p>© 2026 Pywi - Todos los derechos reservados</p>
+    <p style="margin-top: 0.5rem;">Created by <span class="brand">MSM</span></p>
+    <p style="margin-top: 0.2rem; font-size: 0.7rem;">Mobile Social Marketing</p>
+  </footer>
+
+  <script>
+    var productos = {
+      tecnologia: [
+        { nombre: "Audífono Sordera Amplificador", precio: "$53.000", precioOld: "$68.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-471869.jpg" },
+        { nombre: "Audífono Traductor con IA", precio: "$66.000", precioOld: "$78.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-588424.jpg" },
+        { nombre: "Mini Proyector de Vídeo T500", precio: "$231.965", precioOld: "$265.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-466550.jpg" }
+      ],
+      belleza: [
+        { nombre: "C-LAGEN Colágeno", precio: "$64.300", precioOld: "$93.000", imagen: "https://store-cdn.venndelo.com/shared/image-c-lagen-1092829-i605675-s200x200-f1.jpg" },
+        { nombre: "Suero Crecimiento Cabello", precio: "$34.700", precioOld: "$68.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-533788.jpg" },
+        { nombre: "Crema Blanqueadora Hismile V34", precio: "$53.000", precioOld: "$68.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-512993.jpg" },
+        { nombre: "Lámpara Secador de Uñas UV LED 48W", precio: "$83.000", precioOld: "$108.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-385892.jpg" },
+        { nombre: "Shampoo Canas Color Negro x10", precio: "$43.005", precioOld: "$62.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-523773.jpg" }
+      ],
+      salud: [
+        { nombre: "Bisglicinato de Magnesio x60", precio: "$48.900", precioOld: "$84.400", imagen: "https://store-cdn.venndelo.com/shared/image-bisglicinato-de-magnesio-x60und-1091817-i603502-s200x200-f1.jpg" },
+        { nombre: "Berberina x60", precio: "$56.390", precioOld: "$79.900", imagen: "https://store-cdn.venndelo.com/shared/imagen-603499.jpg" },
+        { nombre: "Photen X x500ml", precio: "$66.900", precioOld: "$98.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-603442.jpg" },
+        { nombre: "Cinturón Térmico Cólicos", precio: "$59.300", precioOld: "$78.600", imagen: "https://store-cdn.venndelo.com/shared/imagen-574284.jpg" },
+        { nombre: "Blanqueador Dientes Carbón", precio: "$29.400", precioOld: "$44.600", imagen: "https://store-cdn.venndelo.com/shared/imagen-561597.jpg" }
+      ],
+      hogar: [
+        { nombre: "Escurridor de Platos con Tapa 65cm", precio: "$141.000", precioOld: "$158.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-593262.jpg" },
+        { nombre: "Picadora Eléctrica de Alimentos 2L", precio: "$83.999", precioOld: "$132.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-602768.jpg" },
+        { nombre: "Tendedero Gancho Espira", precio: "$36.900", precioOld: "$62.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-475995.jpg" },
+        { nombre: "Organizador Gancho Múltiple 9 en 1", precio: "$22.000", precioOld: "$25.599", imagen: "https://store-cdn.venndelo.com/shared/imagen-415383.jpg" },
+        { nombre: "Llave Universal Multiuso", precio: "$51.999", precioOld: "$88.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-352393.jpg" },
+        { nombre: "Llave Universal 48 en 1", precio: "$63.645", precioOld: "$68.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-316629.jpg" },
+        { nombre: "Bombillos de Mosquito 15W", precio: "$39.000", precioOld: "$48.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-384421.jpg" },
+        { nombre: "Grifo Ahorrador y Purificador 360°", precio: "$32.000", precioOld: "$42.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-271083.jpg" },
+        { nombre: "Molinillo de Pimienta y Sales", precio: "$63.900", precioOld: "$83.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-476674.jpg" }
+      ],
+      mascota: [
+        { nombre: "Cepillo Masajeador Mascotas 2 en 1", precio: "$24.000", precioOld: "$46.355", imagen: "https://store-cdn.venndelo.com/shared/imagen-472350.jpg" }
+      ],
+      ropa: [
+        { nombre: "Levantador Busto Reutilizable", precio: "$43.000", precioOld: "$56.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-285644.jpg" }
+      ]
+    };
+
+    var nombresCategorias = {
+      tecnologia: "📱 Tecnología",
+      belleza: "💄 Belleza",
+      salud: "💊 Salud",
+      hogar: "🏠 Hogar",
+      mascota: "🐾 Mascota",
+      ropa: " Ropa"
+    };
+
+    function showProducts(categoria) {
+      var productosCat = productos[categoria];
+      var grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+      
+      for (var i = 0; i < productosCat.length; i++) {
+        var prod = productosCat[i];
+        var card = document.createElement('a');
+        card.className = 'product-card';
+        card.href = 'landing.html?producto=' + encodeURIComponent(prod.nombre) + '&precio=' + encodeURIComponent(prod.precio) + '&imagen=' + encodeURIComponent(prod.imagen);
+        card.innerHTML = '<img src="' + prod.imagen + '" alt="' + prod.nombre + '" class="product-img">' +
+          '<div class="product-info">' +
+            '<div class="product-name">' + prod.nombre + '</div>' +
+            '<div><span class="product-price">' + prod.precio + '</span> <span class="product-price-old">' + prod.precioOld + '</span></div>' +
+            '<div class="product-shipping">PAGO CONTRA ENTREGA - DOMICILIO GRATIS</div>' +
+          '</div>';
+        grid.appendChild(card);
+      }
+      
+      document.getElementById('categoriesSection').style.display = 'none';
+      document.getElementById('mainTitle').style.display = 'none';
+      document.getElementById('productsSection').style.display = 'block';
+      document.getElementById('backBtn').style.display = 'inline-block';
+      document.getElementById('categoryHeader').style.display = 'block';
+      document.getElementById('categoryHeader').textContent = nombresCategorias[categoria];
+      window.scrollTo(0, 0);
+    }
+
+    function showCategories() {
+      document.getElementById('categoriesSection').style.display = 'block';
+      document.getElementById('mainTitle').style.display = 'block';
+      document.getElementById('productsSection').style.display = 'none';
+      document.getElementById('backBtn').style.display = 'none';
+      document.getElementById('categoryHeader').style.display = 'none';
+      window.scrollTo(0, 0);
+    }
+  </script>
+
+</body>
+</html>
