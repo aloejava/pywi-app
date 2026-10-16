@@ -1,20 +1,24 @@
 {
-  "name": "Pywi",
+  "name": "Pywi - Tu Tienda en el Bolsillo",
   "short_name": "Pywi",
+  "description": "Tienda online con los mejores productos de tecnología, belleza, hogar y más.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2979ff",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "./logo-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "./logo.png",
+      "src": "./logo-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
