@@ -1,4 +1,4 @@
-<!DOCTYPE html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -18,7 +18,7 @@
       font-family: 'Plus Jakarta Sans', sans-serif; 
       background-color: #090d16; 
       color: #f8fafc; 
-      padding-bottom: 80px;
+      padding-bottom: 60px;
     }
     header {
       background: linear-gradient(135deg, #1e3c72 0%, #2a5298 25%, #7e57c2 50%, #ec407a 75%, #f093fb 100%);
@@ -129,30 +129,6 @@
       margin-top: 2rem;
     }
     footer .brand { color: #f8fafc; font-weight: 700; }
-    
-    /* BOTÓN FLOTANTE DE WHATSAPP */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 60px;
-      height: 60px;
-      background-color: #25D366;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-      z-index: 9999;
-      text-decoration: none;
-      animation: pulse 2s infinite;
-    }
-    .whatsapp-float svg { width: 32px; height: 32px; fill: white; }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-      70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-    }
   </style>
 </head>
 <body>
@@ -162,7 +138,7 @@
     <p class="tagline">Tu tienda favorita, ahora en tu bolsillo</p>
   </header>
 
-  <h2 class="section-title" id="mainTitle">🛍️ Nuestras Categorías</h2>
+  <h2 class="section-title" id="mainTitle">️ Nuestras Categorías</h2>
   <div class="category-header" id="categoryHeader"></div>
   <button class="back-btn" id="backBtn" onclick="showCategories()">← Volver a categorías</button>
 
@@ -186,16 +162,6 @@
     <p style="margin-top: 0.5rem;">Created by <span class="brand">MSM</span></p>
     <p style="margin-top: 0.2rem; font-size: 0.7rem;">Mobile Social Marketing</p>
   </footer>
-
-  <!-- BOTÓN FLOTANTE DE WHATSAPP -->
-  <a href="https://wa.me/573027433437?text=Hola%20Pywi,%20quiero%20hacer%20un%20pedido" 
-     class="whatsapp-float" 
-     target="_blank" 
-     aria-label="Contactar por WhatsApp">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-    </svg>
-  </a>
 
   <script>
     var productos = {
@@ -233,199 +199,51 @@
         { nombre: "Cepillo Masajeador Mascotas 2 en 1", precio: "$24.000", precioOld: "$46.355", imagen: "https://store-cdn.venndelo.com/shared/imagen-472350.jpg" }
       ],
       ropa: [
-        {
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <title>Pywi - Tu Tienda en el Bolsillo</title>
-  <link rel="manifest" href="./manifest.json">
-  <link rel="icon" type="image/png" href="logo-192.png">
-  <meta name="theme-color" content="#090d16">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body { 
-      font-family: 'Plus Jakarta Sans', sans-serif; 
-      background-color: #090d16; 
-      color: #f8fafc; 
-      padding-bottom: 80px;
-    }
-    header {
-      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 25%, #7e57c2 50%, #ec407a 75%, #f093fb 100%);
-      padding: 2rem 1rem;
-      text-align: center;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .logo-img { 
-      width: 130px; 
-      height: 130px; 
-      object-fit: contain; 
-      margin-bottom: 0.5rem; 
-      border-radius: 50%; 
-      background: white; 
-      padding: 8px; 
-    }
-    .tagline { 
-      color: rgba(255,255,255,0.95); 
-      font-size: 1rem; 
-      font-weight: 600; 
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
-    }
-    .section-title { 
-      text-align: center; 
-      font-size: 1.4rem; 
-      font-weight: 800; 
-      margin: 1.5rem 1rem 1rem; 
-    }
-    .categories { padding: 0 1rem; }
-    .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
-    .cat-btn {
-      background: #131c2e; 
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 1.5rem 0.5rem; 
-      border-radius: 14px; 
-      text-align: center;
-      color: #f8fafc; 
-      font-weight: 700; 
-      font-size: 0.95rem;
-      display: flex; 
-      flex-direction: column; 
-      align-items: center; 
-      gap: 0.5rem; 
-      cursor: pointer;
-    }
-    .cat-btn:active { transform: scale(0.95); background: #1a2540; }
-    .cat-btn span { font-size: 2.5rem; }
-    .back-btn {
-      display: none; 
-      margin: 1rem; 
-      padding: 0.8rem 1.5rem;
-      background: #131c2e; 
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 10px; 
-      color: #f8fafc; 
-      font-weight: 700; 
-      font-size: 0.9rem; 
-      cursor: pointer;
-    }
-    .back-btn:active { transform: scale(0.95); }
-    .products { padding: 0 1rem; display: none; }
-    .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
-    .product-card {
-      background: #131c2e; 
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 12px; 
-      overflow: hidden; 
-      text-decoration: none;
-      color: #f8fafc; 
-      display: flex; 
-      flex-direction: column;
-    }
-    .product-card:active { transform: scale(0.97); }
-    .product-img { 
-      width: 100%; 
-      height: 140px; 
-      object-fit: cover; 
-      background: #1e293b; 
-      display: block;
-    }
-    .product-info { padding: 0.75rem; flex: 1; display: flex; flex-direction: column; }
-    .product-name { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; line-height: 1.2; }
-    .product-price { color: #25D366; font-weight: 800; font-size: 1rem; }
-    .product-price-old { color: #94a3b8; font-size: 0.75rem; text-decoration: line-through; margin-left: 0.3rem; }
-    .product-shipping { 
-      font-size: 0.6rem; 
-      font-weight: 700; 
-      color: #3b82f6;
-      text-transform: uppercase;
-      background: rgba(59, 130, 246, 0.1);
-      padding: 0.3rem 0.4rem; 
-      border-radius: 4px; 
-      margin-top: auto;
-    }
-    .category-header { 
-      display: none; 
-      text-align: center; 
-      padding: 0.5rem 1rem;
-      font-size: 1.1rem; 
-      font-weight: 700; 
-      color: #25D366;
-    }
-    footer { 
-      text-align: center; 
-      padding: 2rem 1rem; 
-      color: #94a3b8;
-      font-size: 0.75rem; 
-      margin-top: 2rem;
-    }
-    footer .brand { color: #f8fafc; font-weight: 700; }
-    
-    /* BOTÓN FLOTANTE DE WHATSAPP */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 60px;
-      height: 60px;
-      background-color: #25D366;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-      z-index: 9999;
-      text-decoration: none;
-      animation: pulse 2s infinite;
-    }
-    .whatsapp-float svg { width: 32px; height: 32px; fill: white; }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-      70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-    }
-  </style>
-</head>
-<body>
+        { nombre: "Levantador Busto Reutilizable", precio: "$43.000", precioOld: "$56.000", imagen: "https://store-cdn.venndelo.com/shared/imagen-285644.jpg" }
+      ]
+    };
 
-  <header>
-    <img src="logo.png" alt="Pywi" class="logo-img">
-    <p class="tagline">Tu tienda favorita, ahora en tu bolsillo</p>
-  </header>
+    var nombresCategorias = {
+      tecnologia: " Tecnología", belleza: "💄 Belleza", salud: "💊 Salud",
+      hogar: "🏠 Hogar", mascota: " Mascota", ropa: "👕 Ropa"
+    };
 
-  <h2 class="section-title" id="mainTitle">🛍️ Nuestras Categorías</h2>
-  <div class="category-header" id="categoryHeader"></div>
-  <button class="back-btn" id="backBtn" onclick="showCategories()">← Volver a categorías</button>
+    function showProducts(categoria) {
+      var productosCat = productos[categoria];
+      var grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+      
+      for (var i = 0; i < productosCat.length; i++) {
+        var prod = productosCat[i];
+        var card = document.createElement('a');
+        card.className = 'product-card';
+        card.href = 'landing.html?producto=' + encodeURIComponent(prod.nombre) + '&precio=' + encodeURIComponent(prod.precio) + '&imagen=' + encodeURIComponent(prod.imagen);
+        card.innerHTML = '<img src="' + prod.imagen + '" alt="' + prod.nombre + '" class="product-img">' +
+          '<div class="product-info">' +
+            '<div class="product-name">' + prod.nombre + '</div>' +
+            '<div><span class="product-price">' + prod.precio + '</span> <span class="product-price-old">' + prod.precioOld + '</span></div>' +
+            '<div class="product-shipping">PAGO CONTRA ENTREGA - DOMICILIO GRATIS</div>' +
+          '</div>';
+        grid.appendChild(card);
+      }
+      
+      document.getElementById('categoriesSection').style.display = 'none';
+      document.getElementById('mainTitle').style.display = 'none';
+      document.getElementById('productsSection').style.display = 'block';
+      document.getElementById('backBtn').style.display = 'inline-block';
+      document.getElementById('categoryHeader').style.display = 'block';
+      document.getElementById('categoryHeader').innerText = nombresCategorias[categoria];
+      window.scrollTo(0, 0);
+    }
 
-  <div class="categories" id="categoriesSection">
-    <div class="cat-grid">
-      <div class="cat-btn" onclick="showProducts('tecnologia')"><span>📱</span>Tecnología</div>
-      <div class="cat-btn" onclick="showProducts('belleza')"><span>💄</span>Belleza</div>
-      <div class="cat-btn" onclick="showProducts('salud')"><span>💊</span>Salud</div>
-      <div class="cat-btn" onclick="showProducts('hogar')"><span>🏠</span>Hogar</div>
-      <div class="cat-btn" onclick="showProducts('mascota')"><span>🐾</span>Mascota</div>
-      <div class="cat-btn" onclick="showProducts('ropa')"><span>👕</span>Ropa</div>
-    </div>
-  </div>
-
-  <div class="products" id="productsSection">
-    <div class="product-grid" id="productGrid"></div>
-  </div>
-
-  <footer>
-    <p>© 2026 Pywi - Todos los derechos reservados</p>
-    <p style="margin-top: 0.5rem;">Created by <span class="brand">MSM</span></p>
-    <p style="margin-top: 0.2rem; font-size: 0.7rem;">Mobile Social Marketing</p>
-  </footer>
-
-  <!-- BOTÓN FLOTANTE DE WHATSAPP -->
-  <a href="https://wa.me/573027433437?text=Hola%20Pywi,%20quiero%20hacer%20un%20pedido" 
-     class="whatsapp-float" 
-     target="_blank" 
-     aria-label="Contactar por WhatsApp">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01
+    function showCategories() {
+      document.getElementById('categoriesSection').style.display = 'block';
+      document.getElementById('mainTitle').style.display = 'block';
+      document.getElementById('productsSection').style.display = 'none';
+      document.getElementById('backBtn').style.display = 'none';
+      document.getElementById('categoryHeader').style.display = 'none';
+      window.scrollTo(0, 0);
+    }
+  </script>
+</body>
+</html>
